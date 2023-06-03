@@ -22,7 +22,7 @@ class _QuizScreenState extends State<QuizScreen> {
   late Future quiz;
   int count_correct = 0;
 
-  int demTime = 0;
+  int countTime = 0;
   int points = 0;
 
   var isLoaded = false;
@@ -65,7 +65,7 @@ class _QuizScreenState extends State<QuizScreen> {
       setState(() {
         if (seconds > 0) {
           seconds--;
-          demTime++;
+          countTime++;
         } else {
           gotoNextQuestion();
         }
@@ -170,6 +170,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               } else if (optionsList[index].toString() !=
                                   answer.toString()) {
                                 optionsColor[index] = Colors.red;
+        
                               }
                               if (currentQuestionIndex < data.length - 1) {
                                 Future.delayed(const Duration(seconds: 1), () {
@@ -179,12 +180,12 @@ class _QuizScreenState extends State<QuizScreen> {
                                   data.length - 1) {
                                 timer!.cancel();
                                 //here you can do whatever you want with the results
-                                // runDialog(count_correct,demTime);
+                                // runDialog(count_correct,countTime);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ScoreScreen(count_correct, demTime)));
+                                            ScoreScreen(count_correct, countTime)));
                               }
                             });
                           },

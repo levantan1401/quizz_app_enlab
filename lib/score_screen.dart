@@ -6,11 +6,30 @@ import 'package:quizz_app_enlab/const/text.dart';
 import 'package:quizz_app_enlab/quiz_screen.dart';
 
 class ScoreScreen extends StatelessWidget {
-  const ScoreScreen(this.count_correct, this.demTime, {Key? key})
+  ScoreScreen(this.count_correct, this.countTime, {Key? key})
       : super(key: key);
 
   final int count_correct;
-  final int demTime;
+  final int countTime;
+
+  String headNoti ='';
+  String textWish ='';
+
+  headNotifi(count_correct) {
+    if(count_correct > 3) {
+      return headNoti = "Congratulations!!!";
+    }else if(count_correct <= 3 && count_correct >= 0) {
+      return headNoti = "Completed!";
+    }
+  }
+  textMsg(count_correct) {
+    if(count_correct > 3) {
+      return textWish = "You are amazing!!!";
+    }else if(count_correct <= 3 && count_correct >= 0) {
+      return textWish = "Better luck next time!";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -37,14 +56,17 @@ class ScoreScreen extends StatelessWidget {
               height: 20,
             ),
             headingText(
-                text: "Congratulations!!!", color: Colors.white, size: 28),
+                // text: "${headNoti.toString()}",
+                text:"${headNotifi(count_correct)}",
+                color: Colors.white, size: 28),
             normalText(
-                text: "You are amazing!!!", color: Colors.white, size: 18),
+                text:"${textMsg(count_correct)}", color: Colors.white, size: 18),
             normalText(
                 text:
-                    "${count_correct}/5 correct answers in ${demTime} seconds",
+                    "${count_correct}/5 correct answers in ${countTime} seconds",
                 color: Colors.white,
                 size: 18),
+            
             const SizedBox(
               height: 20,
             ),
